@@ -8,9 +8,9 @@ from schemas import OrderCreate
 
 def create_order(db: Session, order: OrderCreate) -> Order:
     """
-    List all orders, optionally filtered by status.
+    Event handler for creating new orders in database
     :param db: Database session dependency.
-    :param order: Database session dependency.
+    :param order: Order data to be created
     :return: Conversion rate
     """
     db_order = Order(
@@ -26,19 +26,19 @@ def create_order(db: Session, order: OrderCreate) -> Order:
 
 def get_order(db: Session, order_id: int) -> Order:
     """
-    List all orders, optionally filtered by status.
+    Event handler for retrieving order from database
     :param db: Database session dependency.
-    :param order: Database session dependency.
-    :return: Conversion rate
+    :param order_id: Order id
+    :return: Order from database
     """
     return db.query(Order).filter(Order.id == order_id).first()
 
 def update_order_status(db: Session, order_id: int, status: str) -> Order:
     """
-    List all orders, optionally filtered by status.
+    Event handler for updating order status in database
     :param db: Database session dependency.
-    :param order: Database session dependency.
-    :return: Conversion rate
+    :param order_id: Order id
+    :return: Order from database
     """
     order = db.query(Order).filter(Order.id == order_id).first()
     if order:
@@ -49,9 +49,8 @@ def update_order_status(db: Session, order_id: int, status: str) -> Order:
 
 def get_orders(db: Session) -> list[Type[Order]]:
     """
-    List all orders, optionally filtered by status.
+    Event handler for retrieving multiple orders from database
     :param db: Database session dependency.
-    :param order: Database session dependency.
-    :return: Conversion rate
+    :return: Order from database
     """
     return db.query(Order).all()

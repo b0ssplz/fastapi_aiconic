@@ -17,8 +17,8 @@ database.set_db()
 @app.post("/orders/", response_model=OrderResponse)
 def create_order_endpoint(order: OrderCreate, db: Session = Depends(get_db)):
     """
-    List all orders, optionally filtered by status.
-    :param order: Optional order status to filter by (e.g., "pending", "shipped").
+    Creates new order based on retrieved data
+    :param order: Order data
     :param db: Database session dependency.
     :return: A list of orders, optionally filtered by status.
     """
@@ -29,10 +29,10 @@ def create_order_endpoint(order: OrderCreate, db: Session = Depends(get_db)):
 @app.get("/orders/{order_id}/", response_model=OrderResponse)
 def get_order_endpoint(order_id: int, db: Session = Depends(get_db)):
     """
-    List all orders, optionally filtered by status.
-    :param order_id: Optional order status to filter by (e.g., "pending", "shipped").
+    Retrieves given order from database
+    :param order_id: Order id
     :param db: Database session dependency.
-    :return: A list of orders, optionally filtered by status.
+    :return: Fetched order data from database
     """
     order = get_order(db, order_id)
     if not order:
@@ -52,11 +52,11 @@ def get_order_endpoint(order_id: int, db: Session = Depends(get_db)):
 @app.put("/orders/{order_id}/", response_model=OrderResponse)
 def update_order_endpoint(order_id: int, order_update: OrderUpdate, db: Session = Depends(get_db)):
     """
-    List all orders, optionally filtered by status.
-    :param order_id: Optional order status to filter by (e.g., "pending", "shipped").
-    :param order_update: Optional order status to filter by (e.g., "pending", "shipped").
+    Update status of given order
+    :param order_id: Order id
+    :param order_update: Order data to be updated
     :param db: Database session dependency.
-    :return: A list of orders, optionally filtered by status.
+    :return: Updated order data fetched from database
     """
     updated_order = update_order_status(db, order_id, order_update.status)
     if not updated_order:

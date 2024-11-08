@@ -8,7 +8,7 @@ from models.order import Order
 
 def get_conversion_rate(db: Session, order: Order) -> float:
     """
-    Retrieve response from NBP API and
+    Retrieve response from NBP API and save conversion rates
     :param db: Database session dependency.
     :param order: Order data
     :return: Conversion rate
