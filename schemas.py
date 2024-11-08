@@ -1,10 +1,10 @@
 from pydantic import BaseModel
-from models import OrderStatus
+from models.order import OrderStatus
 
 class OrderCreate(BaseModel):
     customer_name: str
     total_amount: float
-    currency: str
+    currency_code: str
     status: OrderStatus
 
 class OrderUpdate(BaseModel):
@@ -15,7 +15,7 @@ class OrderResponse(BaseModel):
     id: int
     customer_name: str
     total_amount: float
-    currency: str
+    currency_code: str
     status: OrderStatus
     converted_amount: float = None
 
